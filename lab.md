@@ -160,6 +160,7 @@ By the end of this lab, you will be able to:
             ```bash
             mkdir lab04  # Create the directory
             cd lab04     # Navigate into the directory
+            code .       # Opening Visual Studio Code
             ```
 
         2.  **Set up a Virtual Environment:**
