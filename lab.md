@@ -147,9 +147,10 @@ We will build a simplified MLOps pipeline for a customer churn prediction model 
     *   **Activities:**
 
          1.  **Create a New Notebook**
+            *   On Jupyter, go to the `lab4.3` subfolder
             *   Click the "New" button (usually on the right-hand side).
             *   Select "Python 3 (ipykernel)" (or the appropriate kernel if it's named differently). This creates a new notebook file.
-            *   Rename the notebook: Click on "Untitled" at the top of the page and give it a descriptive name like `mlops_lab.ipynb`.
+            *   Rename the notebook: Click on "Untitled" at the top of the page and give it a descriptive name like `mlops_lab`.
 
 **Part 2: Data Exploration (10 minutes)**
 
@@ -196,7 +197,7 @@ We will build a simplified MLOps pipeline for a customer churn prediction model 
 
 - **Section A: Standalone Python Script for Model Training (20 minutes)**
     - **Activities:**
-        - **Create `train.py`:**  *Within the Jupyter Notebook interface*, opening the file browser ("View" -> "File Browser") to navigate to the `lab04` directory. Click "New" -> "New File" and use the dile name: `train.py` and open it with right click over it and clicking "Open"
+        - **Create `train.py`:**  *On the same folder (`lab4.3`)*, Click "New" -> "New text File" and changed the default name (`untitled.txt`) to: `train.py` and open it with right click over it and clicking "Open"
         - Develop and run `train.py`:
             - Load and preprocess data (all preprocessing steps from the overview).
             - Split data into training and testing sets.
@@ -327,7 +328,7 @@ We will build a simplified MLOps pipeline for a customer churn prediction model 
         !python train.py
         ```
 
-    - Wait about one minutes for the results 
+    - Wait about 30 seconds to get the results 
 
 **Model Evaluation Metrics (train.py output)**
 
@@ -347,28 +348,23 @@ Precision: Focuses on the positive predictions (predictions of "churn"). It answ
     *   **Key Learning:** Visualize the impact of different hyperparameters on model performance. Use the MLflow UI to compare different runs and understand the experiment tracking process.  Learn the importance of running long-running processes like web servers in a separate terminal for stability and responsiveness of the Jupyter Notebook.
     *   **Commands (in a SEPARATE TERMINAL):**
 
-        1.  **Open a Terminal:** Within the Jupyter Notebook interface, go to "File" -> "New Launcher" and select "Terminal". *(Alternatively, use an existing SSH connection to your AWS instance.)*
-
+        1.  **Open a New Terminal and access to the container:** 
+            ```bash
+            sudo docker exec -it sa-course-labs 
+            ```
         2.  **Navigate to the Project Directory:**
-              Make sure you are in the `lab04` directory where you created your environment and scripts.
+              Make sure you are in the `lab4.3` directory where you created your environment and scripts.
             ```bash
-            cd lab04
+            cd lab4.3
             ```
-
-        3.  **Activate the Virtual Environment:**
+        3.  **Launch the MLflow UI:**
             ```bash
-            source .venv/bin/activate
-            ```
-            *(This is crucial: make sure the terminal uses the same environment as your Jupyter Notebook.)*
-
-        4.  **Launch the MLflow UI:**
-            ```bash
-            mlflow ui
+            mlflow ui --host 0.0.0.0
             ```
 
     *   **Interactive Exploration (Instructor-Led):**
 
-        1.  **Access the MLflow UI:** Open a new browser tab and go to `http://<your-instance-public-ip>:5000`. Replace `<your-instance-public-ip>` with your instance's *actual public IP address*.
+        1.  **Access the MLflow UI:** Open a new browser tab and go to `http://localhost:5000`. 
         2.  **Explore the UI:**
             *   Show the list of runs.
             *   Click on a run to see its details: parameters, metrics, artifacts (including the `model` directory).
@@ -569,17 +565,15 @@ Precision: Focuses on the positive predictions (predictions of "churn"). It answ
 
     - **Instructions:**
 
-        1.  **Start the Flask Server (in a Separate Terminal):**
-
-            *   Open a *new* terminal window or tab.  **(Important: Do *not* run this in a Jupyter Notebook cell.)** Within the Jupyter Notebook interface, go to "File" -> "New Launcher" and select "Terminal". *(Alternatively, use an existing SSH connection to your AWS instance.)*
-            *   Navigate to the `lab04` directory:
-                ```bash
-                cd lab04
-                ```
-            *   Activate the virtual environment:
-                ```bash
-                source .venv/bin/activate
-                ```
+        1.  **Open a New Terminal and access to the container:** 
+            ```bash
+            sudo docker exec -it sa-course-labs 
+            ```
+        2.  **Navigate to the Project Directory:**
+              Make sure you are in the `lab4.3` directory where you created your environment and scripts.
+            ```bash
+            cd lab4.3
+            ```
             * **Set the MLFLOW_TRACKING_URI Environment Variable:**
                 ```bash
                 export MLFLOW_TRACKING_URI="http://127.0.0.1:5000"
@@ -599,7 +593,7 @@ Precision: Focuses on the positive predictions (predictions of "churn"). It answ
 
         2.  **Test the Deployment (from Jupyter Notebook or the Terminal):**
 
-            Now, go back to your Jupyter Notebook (`mlops_lab.ipynb`). You can use *either* `curl` (Method 1) *or* a Python script (Method 2) to send test requests.  You can also use the terminal if you prefer.
+            Now, you can use *either* `curl` directly in the terminal or over a Jupyter Notebook, adding `!` to curl to test it:
 
             ```bash
             curl -X POST -H "Content-Type: application/json" -d '[{"SeniorCitizen":0,"tenure":1,"MonthlyCharges":29.85,"TotalCharges":29.85,"Partner_Yes":1,"Dependents_Yes":0,"PhoneService_Yes":0,"MultipleLines_No phone service":1,"MultipleLines_Yes":0,"OnlineSecurity_No internet service":0,"OnlineSecurity_Yes":0,"OnlineBackup_No internet service":0,"OnlineBackup_Yes":1,"DeviceProtection_No internet service":0,"DeviceProtection_Yes":0,"TechSupport_No internet service":0,"TechSupport_Yes":0,"StreamingTV_No internet service":0,"StreamingTV_Yes":0,"StreamingMovies_No internet service":0,"StreamingMovies_Yes":0,"PaperlessBilling_Yes":1,"InternetService_DSL":0,"InternetService_Fiber optic":0,"InternetService_No":0,"Contract_One year":0,"Contract_Two year":0,"PaymentMethod_Credit card (automatic)":0,"PaymentMethod_Electronic check":1,"PaymentMethod_Mailed check":0}]' http://127.0.0.1:5001/predict
