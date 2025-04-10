@@ -44,19 +44,15 @@ By the end of this lab, you will be able to:
 -   ✅ Gain practical experience with core MLOps concepts, including experiment tracking, model versioning, and simplified deployment.
 -   ✅ Relate the hands-on lab activities to the theoretical concepts learned in the "AI Model Deployment" and "MLOps Fundamentals" lessons.
 
-**Prerequisites:**
-
--   Basic Python programming knowledge.
--   Familiarity with machine learning concepts (e.g., training, testing, evaluation).
--   An AWS account with access to a Jupyter instance
-
 **Lab Environment:**
 
 -   AWS Jupyter instance with Python 3.11.9.
 -   We will be using a public dataset.
 -   **Important:** We will run the Flask server in the background within the Jupyter instance for simplicity. In a real-world scenario, you would deploy it separately.
 
-**Scenario:** We will build a simplified MLOps pipeline for a customer churn prediction model for a telecommunications company, putting into practice the concepts learned in the previous lessons.  We'll focus on the *why* behind each step, not just the *how*.
+**Scenario:**
+
+We will build a simplified MLOps pipeline for a customer churn prediction model for a telecommunications company, putting into practice the concepts learned in the previous lessons.  We'll focus on the *why* behind each step, not just the *how*.
 
 ## Lab Outline:
 
@@ -66,9 +62,7 @@ By the end of this lab, you will be able to:
 
 - **Introduction (2 minutes)**
 
-    *   **Welcome and Overview:** We're going to build a practical, albeit simplified, MLOps pipeline.  Our goal is to take a machine learning model from development to a basic deployment, focusing on experiment tracking, model versioning, and serving predictions.
-
-    *   **Scenario Recap:**  We're working for a telecommunications company that wants to predict customer churn (which customers are likely to leave).  This is a crucial business problem, as retaining existing customers is often more cost-effective than acquiring new ones.
+    *   **Welcome and Overview:** We're going to build a practical and simplified, MLOps pipeline.  Our goal is to take a machine learning model from development to a basic deployment, focusing on experiment tracking, model versioning, and serving predictions.
 
     *   **MLflow's Role:** We'll use MLflow as our central tool.  Think of MLflow as a toolbox that helps us manage the lifecycle of our machine learning model. We'll use it to:
         *   **Track Experiments:**  Record different model training runs, parameters, and results.  This is like keeping a detailed lab notebook.
@@ -152,84 +146,7 @@ By the end of this lab, you will be able to:
 
     *   **Activities:**
 
-        1.  **Create a Project Directory:**
-            We'll start by creating a new directory to hold all the files related to this lab.  This helps keep things organized.  You can name it `lab04` or choose a more descriptive name.
-
-            *In a terminal, run the following commands:*
-
-            ```bash
-            mkdir lab04  # Create the directory
-            cd lab04     # Navigate into the directory
-            code .       # Opening Visual Studio Code
-            ```
-
-        2.  **Set up a Virtual Environment:**
-
-            A virtual environment is a self-contained Python environment that isolates the dependencies for a specific project.  This prevents conflicts between different projects that might require different versions of the same library. We'll use Python's built-in `venv` module to create a virtual environment.
-
-            *In the terminal (inside the `lab04` directory), run:*
-
-            ```bash
-            python3 -m venv .venv  # Create the virtual environment named ".venv"
-            ```
-            This command creates a new folder named `.venv` within your project directory. This folder contains a complete, isolated Python installation.  **Note:** I've changed `python` to `python3` to be more explicit about using Python 3.
-
-        3.  **Activate the Virtual Environment:**
-
-            Before installing any packages or running any Python code, you *must* activate the virtual environment.  Activation tells your shell to use the Python interpreter and libraries within the virtual environment, instead of the system-wide Python installation.
-
-            *   **Linux/macOS:**
-                ```bash
-                source .venv/bin/activate
-                ```
-
-            **CRITICAL:**  You must activate the virtual environment *every time* you open a new terminal window or tab to work on this project.  You'll know the environment is active because your terminal prompt will usually change to show the environment name (e.g., `(.venv) user@host:~/lab04$`).  Forgetting to activate the environment is a *very* common source of errors.
-
-        4.  **Install Libraries:**
-
-            Now that the virtual environment is active, we'll install the Python libraries we need for this lab:
-
-            *   `jupyter`: The Jupyter Notebook system.
-            *   `jupyter_core`: Core Jupyter functionalities.
-            *   `notebook`: Classic Jupyter Notebook interface.
-            *   `mlflow`: For experiment tracking, model packaging, and deployment.
-            *   `scikit-learn`: For machine learning (model training, evaluation).
-            *   `pandas`: For data manipulation.
-            *   `flask`: For creating a web application to serve our model.
-            *   `boto3`: AWS SDK for Python (if you interact with AWS services like S3).
-
-            *In the terminal (with the virtual environment activated), run:*
-
-            ```bash
-            pip install jupyter jupyter_core notebook mlflow scikit-learn pandas flask boto3
-            ```
-
-        5.  **Launch Jupyter Notebook:**
-
-            Finally, we'll launch the Jupyter Notebook server. This will start a web server that allows you to create and run notebooks in your browser.
-
-            *In the terminal (with the virtual environment activated), run:*
-
-            ```bash
-            jupyter notebook --ip=0.0.0.0 --port=8888 --allow-root --NotebookApp.token='' --NotebookApp.password=''
-            ```
-
-            *   `--ip=0.0.0.0`: Makes the notebook server accessible from any IP address (important for accessing it from your browser if you're running it on a remote instance, like an AWS EC2 instance).  This allows connections from outside the machine.
-            *   `--port=8888`:  Specifies the port number the server will listen on (8888 is the default).
-            *   `--allow-root`:  Allows Jupyter to run as the root user (use with caution, especially in production environments).  This is often necessary in cloud-based Jupyter instances.
-            *   `--NotebookApp.token=''`: Disables token-based authentication (for simplicity in this lab, but **not recommended for production**).
-            *   `--NotebookApp.password=''`:  Disables password authentication (again, for simplicity, **not for production**).
-
-            After running this command, Jupyter will provide a URL in the terminal output. It will look something like this:
-
-            ```
-            http://<instance-public-ip>:8888/
-            ```
-            Copy this URL and paste it into your web browser to access the Jupyter Notebook interface.  **Replace `<instance-public-ip>` with the actual public IP address of your AWS Jupyter instance.**
-
-         6.  **Create a New Notebook**
-
-            *   In the Jupyter interface, navigate to where you want to create the lab notebook (likely the `lab04` directory you just created).
+         1.  **Create a New Notebook**
             *   Click the "New" button (usually on the right-hand side).
             *   Select "Python 3 (ipykernel)" (or the appropriate kernel if it's named differently). This creates a new notebook file.
             *   Rename the notebook: Click on "Untitled" at the top of the page and give it a descriptive name like `mlops_lab.ipynb`.
