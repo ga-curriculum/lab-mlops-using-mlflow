@@ -1,4 +1,4 @@
-# MLOps Lab: Experiment Tracking, Model Versioning, and Deployment with MLflow (on AWS Jupyter Instance)
+# MLOps Lab: Experiment Tracking, Model Versioning, and Deployment with MLflow
 
 **Duration:** 90 minutes
 
@@ -35,7 +35,7 @@
 
 By the end of this lab, you will be able to:
 
--   ✅ Set up a basic ML project environment on an AWS Jupyter instance.
+-   ✅ Set up a basic ML project environment on our AWS Workspace.
 -   ✅ Use MLflow to track and log parameters, metrics, and artifacts during model training.
 -   ✅ Package a trained machine learning model using MLflow's standard model format.
 -   ✅ Create a simple REST API using Flask to serve predictions from an MLflow-packaged model.
@@ -58,11 +58,11 @@ We will build a simplified MLOps pipeline for a customer churn prediction model 
 
 **(Total Time: 90 minutes)**
 
-**Part 1: Introduction, Dataset Overview, and Setup (20 minutes)**
+**Part 1: Introduction, Dataset Overview, and Setup**
 
-- **Introduction (2 minutes)**
+- **Introduction**
 
-    *   **Welcome and Overview:** We're going to build a practical and simplified, MLOps pipeline.  Our goal is to take a machine learning model from development to a basic deployment, focusing on experiment tracking, model versioning, and serving predictions.
+    *   **Overview:** We're going to build a practical and simplified, MLOps pipeline.  Our goal is to take a machine learning model from development to a basic deployment, focusing on experiment tracking, model versioning, and serving predictions.
 
     *   **MLflow's Role:** We'll use MLflow as our central tool.  Think of MLflow as a toolbox that helps us manage the lifecycle of our machine learning model. We'll use it to:
         *   **Track Experiments:**  Record different model training runs, parameters, and results.  This is like keeping a detailed lab notebook.
@@ -140,7 +140,7 @@ We will build a simplified MLOps pipeline for a customer churn prediction model 
     *   **Label Encoding the Target Variable ('Churn'):** Convert 'Yes'/'No' to 1/0.
     *   **Scaling Numerical Features:**  We'll scale numerical features (like `tenure` and `MonthlyCharges`) to a similar range.  This helps some algorithms (like Logistic Regression) perform better.
 
--   **Environment Setup (5 minutes)**
+-   **Environment Setup**
 
     In this section, we'll set up the development environment for our MLOps project.  We'll create a dedicated project directory, a virtual environment, install the necessary libraries, and launch Jupyter Notebook.  These steps are crucial for ensuring reproducibility and avoiding conflicts with other Python projects on your system.
 
@@ -193,9 +193,9 @@ We will build a simplified MLOps pipeline for a customer churn prediction model 
     # Q: What's the distribution of the target variable ('Churn')?  Is it balanced? (Use data['Churn'].value_counts())
     ```
 
-**Part 3: Model Training and Experiment Tracking (30 minutes)**
+**Part 3: Model Training and Experiment Tracking**
 
-- **Section A: Standalone Python Script for Model Training (20 minutes)**
+- **Section A: Standalone Python Script for Model Training**
     - **Activities:**
         - **Create `train.py`:**  *On the same folder (`lab4.3`)*, Click "New" -> "New text File" and changed the default name (`untitled.txt`) to: `train.py` and open it with right click over it and clicking "Open"
         - Develop and run `train.py`:
@@ -340,7 +340,7 @@ Precision: Focuses on the positive predictions (predictions of "churn"). It answ
 - **F1-score:** A balanced measure that combines precision and recall. It's useful when you want to consider both false positives and false negatives. An F1-score of 0.6379 represents a reasonable balance between precision and recall in this case, for example.
 
 
-*   **Section B: MLflow UI and Experiment Exploration in Jupyter (10 minutes)**
+*   **Section B: MLflow UI and Experiment Exploration in Jupyter**
     *   **Activities:**
         *   Launch the MLflow UI *in a separate terminal*.
         *   Guide learners through exploring the logged runs (parameters, metrics, artifacts).
@@ -362,7 +362,7 @@ Precision: Focuses on the positive predictions (predictions of "churn"). It answ
             mlflow ui --host 0.0.0.0
             ```
 
-    *   **Interactive Exploration (Instructor-Led):**
+    *   **Interactive Exploration:**
 
         1.  **Access the MLflow UI:** Open a new browser tab and go to `http://localhost:5000`. 
         2.  **Explore the UI:**
@@ -375,7 +375,7 @@ Precision: Focuses on the positive predictions (predictions of "churn"). It answ
         6.  **Compare Runs:** Select the two runs (the original and the modified one) and click "Compare." This will show a side-by-side comparison of the parameters and metrics.
         7.  **Repeat:** Try changing other hyperparameters (e.g., `solver`, `penalty`) and observe the effects.
 
-        **Guiding Questions (for the instructor to ask):**
+        **Guiding Questions:**
 
         *   "How does changing the regularization strength (`C`) affect the model's performance metrics (accuracy, precision, recall, F1)?"
         *   "What happens if you use a different solver (e.g., `lbfgs`)?"
@@ -384,7 +384,7 @@ Precision: Focuses on the positive predictions (predictions of "churn"). It answ
         *   "Why is it important to track these parameters and metrics?" (Connect to the concepts of reproducibility and model selection.)
 
 
-# Part 4: Model Packaging and Deployment (25 minutes)
+# Part 4: Model Packaging and Deployment
 
 - **Section A: Packaging the Model (5 minutes)**
 
@@ -444,7 +444,7 @@ Precision: Focuses on the positive predictions (predictions of "churn"). It answ
 
         *   **Show the Files:**  Use the Jupyter file browser (or the terminal) to navigate into the `mlruns` directory, find the latest run ID, and then open the `model` directory.  Show the students the `MLmodel`, `model.pkl`, and `requirements.txt` files, and *relate the contents of the files back to the explanations you just gave*.  For example, open `MLmodel` and point out the `flavors`, `signature`, and `env` sections. Open `requirements.txt` and show the list of packages.
 
-- **Section B: Creating a Flask-based Serving API (15 minutes)**
+- **Section B: Creating a Flask-based Serving API**
     - **Activities:**
       - **Create `serve.py`:** *Within the Jupyter Notebook interface*, use the file browser to navigate to the `lab04` directory. Click "New" -> "Text File". Rename the file to `serve.py`.
         - Develop `serve.py`:
@@ -553,7 +553,7 @@ Precision: Focuses on the positive predictions (predictions of "churn"). It answ
             app.run(debug=True, host="0.0.0.0", port=5001)
         ```
 
-- **Section C: Testing the Deployment (5 minutes)**
+- **Section C: Testing the Deployment)**
 
     - **Activities:**
         - Launch the Flask server in a *separate* terminal.
@@ -622,7 +622,7 @@ Precision: Focuses on the positive predictions (predictions of "churn"). It answ
                 * **Environment variable not set**: Ensure it was set in the terminal were the server will run
 
 
-**Part 5: Conclusion and Next Steps (5 minutes)**
+**Part 5: Conclusion and Next Steps**
 
 - **Recap:**
     - Briefly summarize the key takeaways from the lab:
