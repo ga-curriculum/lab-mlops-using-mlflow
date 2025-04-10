@@ -567,7 +567,7 @@ Precision: Focuses on the positive predictions (predictions of "churn"). It answ
 
         1.  **Open a New Terminal and access to the container:** 
             ```bash
-            sudo docker exec -it sa-course-labs 
+            sudo docker exec -it sa-course-labs bash
             ```
         2.  **Navigate to the Project Directory:**
               Make sure you are in the `lab4.3` directory where you created your environment and scripts.
