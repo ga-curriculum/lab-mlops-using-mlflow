@@ -36,13 +36,13 @@
 By the end of this lab, you will be able to:
 
 -   ✅ Set up a basic ML project environment on our AWS Workspace.
--   ✅ Use MLflow to track and log parameters, metrics, and artifacts during model training.
+-   ✅ Track and compare experiments using MLflow to track and log parameters, metrics, and artifacts during model training.
 -   ✅ Package a trained machine learning model using MLflow's standard model format.
 -   ✅ Create a simple REST API using Flask to serve predictions from an MLflow-packaged model.
 -   ✅ Understand the basic workflow of deploying a model in a simplified manner.
--   ✅ Run and test a model-serving API locally.
--   ✅ Gain practical experience with core MLOps concepts, including experiment tracking, model versioning, and simplified deployment.
--   ✅ Relate the hands-on lab activities to the theoretical concepts learned in the "AI Model Deployment" and "MLOps Fundamentals" lessons.
+-   ✅ Deploy and test a model-serving API locally.
+-   ✅ Explain how experiment tracking, model versioning, and deployment fit into a basic MLOps workflow.
+-   ✅ Relate hands-on lab activities to the theoretical concepts learned in the "AI Model Deployment" and "MLOps Fundamentals" lessons.
 
 **Lab Environment:**
 
@@ -64,7 +64,7 @@ We will build a simplified MLOps pipeline for a customer churn prediction model 
 
     *   **Overview:** We're going to build a practical and simplified, MLOps pipeline.  Our goal is to take a machine learning model from development to a basic deployment, focusing on experiment tracking, model versioning, and serving predictions.
 
-    *   **MLflow's Role:** We'll use MLflow as our central tool.  Think of MLflow as a toolbox that helps us manage the lifecycle of our machine learning model. We'll use it to:
+    *   **MLflow's Role:** We'll use MLflow as our central tool.  Think of MLflow as a toolbox for managing the machine learning lifecycle. We'll use it to:
         *   **Track Experiments:**  Record different model training runs, parameters, and results.  This is like keeping a detailed lab notebook.
         *   **Package Models:**  Create a standardized, reusable format for our trained model.  This makes it easier to deploy.
         *   **Deploy (Simplified):**  We'll create a simple web service to serve predictions.
@@ -79,7 +79,7 @@ We will build a simplified MLOps pipeline for a customer churn prediction model 
 
         *   **Exploration and Rapid Prototyping:** Jupyter Notebooks are fantastic for interactive data exploration, visualization, and quick experimentation. You can see the results of your code immediately, making it easy to iterate and refine your ideas.
         *   **Documentation and Demonstrations:** Notebooks combine code, results, visualizations, and explanatory text (like this!). This makes them great for documenting your work and sharing it with others.
-        *   **Limitations for Production:** Notebooks are generally *not* ideal for production code due to version control difficulties, automation challenges, and potential for hidden state (where the order of cell execution matters, leading to irreproducible results).
+        *   **Limitations for Production:** Notebooks are generally *not* well-suited for production code due to version control difficulties, automation challenges, and potential for hidden state (where the order of cell execution matters, leading to irreproducible results).
 
     *   **Python Scripts: The Production Workhorses**
 
